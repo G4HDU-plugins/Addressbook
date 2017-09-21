@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="Address Book Plugin" lan="LAN_PLUGIN_addressbook_NAME" version="2.0" date="2017-06-30" compatibility="2.0" installRequired="true" >
+	<author name="Barry Keal G4HDU" url="http://www.keal.me.uk" />
+	
+	<description lan="LAN_PLUGIN_addressbook_DIZ">An address book for listing names, addresses etc.</description>
+	<category>content</category>
+	<keywords>
+		<word>blank</word>
+		<word>empty</word>
+		<word>template</word>
+	</keywords>
+	<screenshots>
+		<image></image>
+	</screenshots>
+	<adminLinks>
+		<link url='admin_config.php' description='Configure Blank Plugin' icon='images/addressbook_32.png' iconSmall='images/addressbook.png' icon128="" primary='true' >LAN_CONGIGURE</link>
+		<link url="admin_config.php?mode=options" description="Configure Blank Prefs" icon="manage" >Blank Prefs</link>
+	</adminLinks>
+	<siteLinks>
+		<link url="{e_PLUGIN}addressbook/index.php" perm='members' sef='index'>LAN_PLUGIN_addressbook_LINK</link>
+	</siteLinks>
+	<pluginPrefs>
+		<pref name="viewClass">253</pref>
+		<pref name="perPage">20</pref>
+		<pref name="defaultcountry">GB</pref>
+	</pluginPrefs>
+	<userClasses>
+		<class name="addressbook_viewer" description="Able to view the address book" />		
+	</userClasses>
+	<mediaCategories>
+		<category type="image">Address Book</category>
+	</mediaCategories>
+</e107Plugin>
