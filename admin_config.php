@@ -20,7 +20,7 @@ if (!getperms("P")) {
     e107::redirect('admin');
     exit;
 }
-
+e107::lan('addressbook',true,true);
 /**
  * plugin_addressbook_admin
  * 
@@ -78,21 +78,21 @@ class plugin_addressbook_admin extends e_admin_dispatcher
      */
     protected $adminMenu = array(
 
-        'main/prefs' => array('caption' => 'Settings', 'perm' => '0'),
+        'main/prefs' => array('caption' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_SETTINGS, 'perm' => '0'),
         'other4' => array('divider' => true),
-        'main/list' => array('caption' => 'Manage Entries', 'perm' => '0'),
+        'main/list' => array('caption' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_ENTRIES, 'perm' => '0'),
         'main/create' => array('caption' => LAN_CREATE, 'perm' => '0'),
         'other0' => array('divider' => true),
-        'titles/list' => array('caption' => 'Manage Titles', 'perm' => '0'),
+        'titles/list' => array('caption' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_TITLES, 'perm' => '0'),
         'titles/create' => array('caption' => LAN_CREATE, 'perm' => '0'),
         'other1' => array('divider' => true),
-        'roles/list' => array('caption' => 'Manage Roles', 'perm' => '0'),
+        'roles/list' => array('caption' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_ROLES, 'perm' => '0'),
         'roles/create' => array('caption' => LAN_CREATE, 'perm' => '0'),
         'other2' => array('divider' => true),
-        'categories/list' => array('caption' => 'Manage Categories', 'perm' => '0'),
+        'categories/list' => array('caption' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_CATEGORIES, 'perm' => '0'),
         'categories/create' => array('caption' => LAN_CREATE, 'perm' => '0'),
         'other3' => array('divider' => true),
-        'countries/list' => array('caption' => 'Manage Countries', 'perm' => '0'),
+        'countries/list' => array('caption' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_COUNTRIES, 'perm' => '0'),
         'countries/create' => array('caption' => LAN_CREATE, 'perm' => '0'),
 
 
@@ -111,7 +111,7 @@ class plugin_addressbook_admin extends e_admin_dispatcher
      * Navigation menu title
      * @var string
      */
-    protected $menuTitle = 'Address Book Menu';
+    protected $menuTitle = LAN_PLUGIN_ADDRESSBOOK_ADMIN_TITLE;
 }
 
 
@@ -127,7 +127,7 @@ class plugin_addressbook_admin extends e_admin_dispatcher
 class plugin_addressbook_admin_ui extends e_admin_ui
 {
     // required
-    protected $pluginTitle = "Address Book";
+    protected $pluginTitle = LAN_PLUGIN_ADDRESSBOOK_ADMIN_PLUGTITLE;
 
     /**
      * plugin name or 'core'
@@ -191,7 +191,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'forced' => false,
             'primary' => true /*, 'noedit'=>TRUE*/ ), //Primary ID is not editable
         'addressbook_title' => array(
-            'title' => 'Title',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_NAMETITLE,
             'type' => 'method',
             'data' => 'int',
             'width' => '15%',
@@ -201,7 +201,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             //   'writeParms' =>  $this->titles,
             'forced' => false),
         'addressbook_lastname' => array(
-            'title' => 'Last Name',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_LASTNAME,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
@@ -211,7 +211,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'batch' => true,
             'filter' => true),
         'addressbook_firstname' => array(
-            'title' => 'First Name',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_FIRSTNAME,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
@@ -221,28 +221,28 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'batch' => true,
             'filter' => true),
         'addressbook_addr1' => array(
-            'title' => 'Address 1',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_ADDR1,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
             'forced' => true,
             'thclass' => ''),
         'addressbook_addr2' => array(
-            'title' => 'Address 2',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_ADDR2,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
             'nolist' => true,
             'thclass' => ''),
         'addressbook_city' => array(
-            'title' => 'Town/City',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_TOWN,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
             'nolist' => true,
             'thclass' => ''),
         'addressbook_county' => array(
-            'title' => 'County/State',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_COUNTY,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
@@ -250,7 +250,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'thclass' => ''),
 
         'addressbook_country' => array(
-            'title' => 'Country',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_COUNTRY,
             'type' => 'method',
             'data' => 'str',
             'width' => 'auto',
@@ -258,14 +258,14 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'thclass' => ''),
 
         'addressbook_postcode' => array(
-            'title' => 'Post/Zip Code',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_POST,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
             'nolist' => true,
             'thclass' => ''),
         'addressbook_phone' => array(
-            'title' => 'Phone',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_PHONE,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
@@ -273,7 +273,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'forced' => true,
             'thclass' => ''),
         'addressbook_mobile' => array(
-            'title' => 'Mobile/Cell',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_MOBILE,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
@@ -281,7 +281,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'forced' => true,
             'thclass' => ''),
         'addressbook_email1' => array(
-            'title' => 'Email',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_EMAIL,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
@@ -289,14 +289,14 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'forced' => true,
             'thclass' => ''),
         'addressbook_email2' => array(
-            'title' => 'Alt Email',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_ALTEMAIL,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
             'nolist' => true,
             'thclass' => ''),
         'addressbook_website' => array(
-            'title' => "Website",
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_WEB,
             'type' => 'url',
             'data' => 'str',
             'width' => 'auto',
@@ -304,7 +304,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'thclass' => 'left'),
 
         'addressbook_category' => array(
-            'title' => 'Category',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_CAT,
             'type' => 'method',
             'data' => 'int',
             'width' => '15%',
@@ -313,7 +313,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'forced' => true),
 
         'addressbook_role' => array(
-            'title' => 'Role',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_ROLE,
             'type' => 'method',
             'data' => 'int',
             'width' => '15%',
@@ -323,7 +323,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'forced' => true),
             
         'addressbook_comments' => array(
-            'title' => 'Additional Information',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_INFO,
             'type' => 'textarea',
             'data' => 'str',
             'width' => 'auto',
@@ -342,18 +342,18 @@ class plugin_addressbook_admin_ui extends e_admin_ui
 
     protected $prefs = array(
         'viewClass' => array(
-            'title' => 'View Class',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_VIEW,
             'type' => 'userclass',
             'data' => 'string',
             'validate' => false),
 
         'perPage' => array(
-            'title' => 'Per Page',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_PAGE,
             'type' => 'number',
             'data' => 'integer'),
 
         'defaultcountry' => array(
-            'title' => 'Default Country',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_DEFAULT,
             'type' => 'method',
             'data' => 'str'),
         );
@@ -588,7 +588,7 @@ class plugin_addressbook_admin_form_ui extends e_admin_form_ui
 class plugin_addressbook_titles_ui extends e_admin_ui
 {
     // required
-    protected $pluginTitle = "Address Book";
+    protected $pluginTitle = LAN_PLUGIN_ADDRESSBOOK_ADMIN_PLUGTITLE;
 
     protected $pluginName = 'addressbook';
 
@@ -622,7 +622,7 @@ class plugin_addressbook_titles_ui extends e_admin_ui
             'primary' => true /*, 'noedit'=>TRUE*/ ), //Primary ID is not editable
 
         'addressbook_titles_title' => array(
-            'title' => 'Name',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_NAME,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
@@ -697,7 +697,7 @@ class plugin_addressbook_countries_ui extends e_admin_ui
             'primary' => true /*, 'noedit'=>TRUE*/ ), //Primary ID is not editable
 
         'addressbook_countries_name' => array(
-            'title' => 'Name',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_NAME,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
@@ -777,7 +777,7 @@ class plugin_addressbook_roles_ui extends e_admin_ui
 
 
         'addressbook_roles_role' => array(
-            'title' => 'Name',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_NAME,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',
@@ -867,7 +867,7 @@ class plugin_addressbook_categories_ui extends e_admin_ui
             'primary' => true /*, 'noedit'=>TRUE*/ ), //Primary ID is not editable
 
         'addressbook_categories_name' => array(
-            'title' => 'Name',
+            'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_NAME,
             'type' => 'text',
             'data' => 'str',
             'width' => 'auto',

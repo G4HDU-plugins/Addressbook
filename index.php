@@ -13,7 +13,7 @@
 if (!defined('e107_INIT')) {
     require_once ("../../class2.php");
 }
-e107::lan('addressbook',false, true);
+e107::lan('addressbook',false, true);  // load English front
  
 
 require_once ('includes/addressbook_class.php');
@@ -22,9 +22,6 @@ $render = $addressbookObj->runPage();
 
 if ($render) {
     require_once (HEADERF); // render the header (everything before the main content area)
-
-     e107::getRender()->tablerender(LAN_PLUGIN_ADDRESSBOOK_FRONT_NAME, $addressbookObj->text);
-
+    e107::getRender()->tablerender(LAN_PLUGIN_ADDRESSBOOK_FRONT_NAME, $addressbookObj->text);
     require_once (FOOTERF); // render the footer (everything after the main content area)
-
 }
