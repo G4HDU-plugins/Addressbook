@@ -1,5 +1,13 @@
 <?php
 
+/*
+* Plugin for the e107 Website System
+*
+* Copyright (C) 2008-2017 Barry Keal G4HDU (http://www.keal.me.uk)
+* Released under the terms and conditions of the
+* GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
+*
+*/
 class addressbook_class
 {
     private $db;
@@ -21,7 +29,8 @@ class addressbook_class
         error_reporting(E_ALL);
         $this->pdfInstalled = e107::isInstalled('e107pdf');
         //  var_dump($this->pdfInstalled);
-        if ($this->pdfInstalled) {
+        if ($this->pdfInstalled)
+        {
             require_once (e_PLUGIN . 'pdf/e107pdf.php'); //require the e107pdf class
         }
         $this->message = e107::getMessage();
@@ -65,13 +74,16 @@ class addressbook_class
     public function runPage()
     {
         $class = $this->prefs['viewClass'];
-        if (!e107::getUser()->checkClass($class, false)) {
+        if (!e107::getUser()->checkClass($class, false))
+        {
             $this->text = $this->notPermitted();
             $this->render = true;
-        } else {
+        } else
+        {
             $text = '';
             $this->action = $_GET['action'];
-            if (!in_array($this->action, $this->allowedActions)) {
+            if (!in_array($this->action, $this->allowedActions))
+            {
                 die('Fail');
             }
             // check commands in allowed array
@@ -80,7 +92,8 @@ class addressbook_class
             $this->rolesValue = intval($_GET['roles']);
             $this->search = $_GET['search'];
             $render = false;
-            switch ($this->action) {
+            switch ($this->action)
+            {
                 case 'ajaxview':
                     //  sleep(10);
                     $this->ajaxPage($this->id);
@@ -128,39 +141,47 @@ class addressbook_class
 
         $whereSearch = '';
 
-        if (strlen($this->search) !== 0) {
+        if (strlen($this->search) !== 0)
+        {
             $this->session->setData('searchterm', $this->search);
             $whereSearch = " (addressbook_firstname like '%{$this->search}%' OR addressbook_lastname like '%{$this->search}%') ";
-        } else {
+        } else
+        {
             $this->session->setData('searchterm', '');
         }
 
         $roleWhere = '';
-        if ($this->rolesValue > 0) {
+        if ($this->rolesValue > 0)
+        {
             $this->session->setData('roleterm', $this->rolesValue);
             // $_SESSION['roleterm'] = $this->rolesValue;
             $roleWhere = '  addressbook_role=' . $this->rolesValue;
-        } else {
+        } else
+        {
             $this->session->setData('searchterm', 0);
 
             //  search or role has changed. go back to start of list
 
         }
 
-        if ($lastSearch != $this->search || $lastRole != $this->rolesValue) {
+        if ($lastSearch != $this->search || $lastRole != $this->rolesValue)
+        {
             $this->from = 0;
         }
 
         $where = '';
         // print $whereSearch.' '.$roleWhere;
-        if (!empty($whereSearch) && empty($roleWhere)) {
+        if (!empty($whereSearch) && empty($roleWhere))
+        {
             $where = " WHERE " . $whereSearch;
-        } elseif (empty($whereSearch) && !empty($roleWhere)) {
+        } elseif (empty($whereSearch) && !empty($roleWhere))
+        {
             $where = " WHERE " . $roleWhere;
-        } elseif (!empty($whereSearch) && !empty($roleWhere)) {
+        } elseif (!empty($whereSearch) && !empty($roleWhere))
+        {
             $where = " WHERE " . $whereSearch . ' AND ' . $roleWhere;
         }
-       // var_dump($where);
+        // var_dump($where);
         return $where;
     }
     /**
@@ -171,10 +192,10 @@ class addressbook_class
     private function generateCSV()
     {
 
-        $where=$this->createWhere();
+        $where = $this->createWhere();
 
         $text = '';
-     //   var_dump($where);
+        //   var_dump($where);
         $text .= $this->tp->parseTemplate($this->template->addressbookListHeader(), true);
         $qry = 'SELECT *
         FROM #addressbook_entries 
@@ -216,10 +237,13 @@ class addressbook_class
             'Role',
             'Comments');
         fputcsv($output, $data);
-        if ($numrows == 0) {
+        if ($numrows == 0)
+        {
             // $text .= $this->tp->parseTemplate($this->template->addressbookListNone(), true);
-        } else {
-            while ($row = $this->db->fetch()) {
+        } else
+        {
+            while ($row = $this->db->fetch())
+            {
                 $data[0] = $row['addressbook_titles_title'];
                 $data[1] = $row['addressbook_lastname'];
                 $data[2] = $row['addressbook_firstname'];
@@ -257,8 +281,7 @@ class addressbook_class
         $keywords = ''; //define keywords
         $image_file = e_PLUGIN . 'addressbook/images/logo.png';
         define('PDFLOGO', $image_file);
-        $pdf->Image($image_file, 0, 0, '48', '48', 'PNG', '', 'T', false, 300, '', false, false,
-            0, false, false, false);
+        $pdf->Image($image_file, 0, 0, '48', '48', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // $orientation='P',$unit='mm',$format='A4', $unicode = true, $encoding = 'UTF-8', $diskcache = false
         $text = array(
             $text,
@@ -295,7 +318,8 @@ class addressbook_class
         $numrows = $this->db->gen($qry, false);
         $rowCount = 0;
         $totalRows = 0;
-        while ($row = $this->db->fetch()) {
+        while ($row = $this->db->fetch())
+        {
             $data[] = array(
                 $row['addressbook_title'],
                 $row['addressbook_lastname'] . ', ' . $row['addressbook_firstname'],
@@ -308,16 +332,19 @@ class addressbook_class
                 $row['addressbook_roles_role']);
             $rowCount++;
             $totalRows++;
-            if ($rowCount >= 24) {
+            if ($rowCount >= 24)
+            {
                 $pdf->ColoredTable($header, $data);
-                if ($numrows - $totalRows > 0) {
+                if ($numrows - $totalRows > 0)
+                {
                     $pdf->AddPage();
                 }
                 $rowCount = 0;
             }
 
         }
-        if ($rowCount > 0) {
+        if ($rowCount > 0)
+        {
             $pdf->ColoredTable($header, $data);
         }
 
@@ -396,20 +423,21 @@ class addressbook_class
         LIMIT ' . $this->from . ',' . $this->prefs['perPage'];
         $numrows = $this->db->gen($qry, false);
         // var_dump($this->shortcodes);
-        if ($numrows == 0) {
+        if ($numrows == 0)
+        {
             $text .= $this->tp->parseTemplate($this->template->addressbookListNone(), true);
-        } else {
-            while ($row = $this->db->fetch()) {
-                $text .= $this->tp->parseTemplate($this->template->addressbookListRow($row), true,
-                    $this->shortcodes);
+        } else
+        {
+            while ($row = $this->db->fetch())
+            {
+                $text .= $this->tp->parseTemplate($this->template->addressbookListRow($row), true, $this->shortcodes);
             }
 
         }
         $total = $this->db->count('addressbook_entries', '(addressbook_id)', $where, false);
         $amount = $this->prefs['perPage'];
         $current = $this->from;
-        $url = rawurlencode(e_SELF . '?action=list&from=--FROM--&search=' . $this->
-            search . '&roles=' . $this->rolesValue);
+        $url = rawurlencode(e_SELF . '?action=list&from=--FROM--&search=' . $this->search . '&roles=' . $this->rolesValue);
         $type = 'record';
         $parm = "total={$total}&amount={$amount}&current={$current}&type={$type}&url={$url}";
 
@@ -426,9 +454,11 @@ class addressbook_class
      */
     private function ajaxPage($id = 0)
     {
-        if ($id == 0) {
+        if ($id == 0)
+        {
             echo "invalid record";
-        } else {
+        } else
+        {
             $qry = 'SELECT *
         FROM #addressbook_entries 
         LEFT JOIN #addressbook_titles ON addressbook_title=addressbook_titles_id
@@ -437,9 +467,11 @@ class addressbook_class
         LEFT JOIN #addressbook_countries ON addressbook_country=addressbook_countries_id
         where addressbook_id=' . $id;
             $numrows = $this->db->gen($qry, false);
-            if ($numrows !== 1) {
+            if ($numrows !== 1)
+            {
                 echo "record not found";
-            } else {
+            } else
+            {
                 $row = $this->db->fetch();
                 $text .= $this->tp->parseTemplate($this->template->viewEntry($row), true);
                 echo $text;
@@ -454,17 +486,21 @@ class addressbook_class
      */
     private function viewPage($id = 0)
     {
-        if ($id == 0) {
+        if ($id == 0)
+        {
 
             $text .= $this->tp->parseTemplate($this->template->noRecords(), true);
-        } else {
+        } else
+        {
             $qry = 'SELECT e.*,r.addressbook_roles_role
         FROM #addressbook_entries as e LEFT JOIN #addressbook_roles as r ON addressbook_role=addressbook_roles_id
         where addressbook_id=' . $id;
             $numrows = $this->db->gen($qry, false);
-            if ($numrows !== 1) {
+            if ($numrows !== 1)
+            {
                 echo "record not found";
-            } else {
+            } else
+            {
                 $row = $this->db->fetch();
                 $text .= $this->tp->parseTemplate($this->template->showEntry($row), true);
             }

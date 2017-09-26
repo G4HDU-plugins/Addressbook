@@ -1,5 +1,13 @@
 <?php
 
+/*
+* Plugin for the e107 Website System
+*
+* Copyright (C) 2008-2017 Barry Keal G4HDU (http://www.keal.me.uk)
+* Released under the terms and conditions of the
+* GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
+*
+*/
 // Front end language file
 
 define("LAN_PLUGIN_ADDRESSBOOK_ADMIN_SETTINGS", "Settings");
@@ -35,5 +43,3 @@ define("LAN_PLUGIN_ADDRESSBOOK_ADMIN_PAGE", 'Per Page');
 define("LAN_PLUGIN_ADDRESSBOOK_ADMIN_DEFAULT", 'Default Country');
 
 define("LAN_PLUGIN_ADDRESSBOOK_ADMIN_NAME", 'Name');
-
-

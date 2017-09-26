@@ -1,6 +1,13 @@
 <?php
 
-
+/*
+* Plugin for the e107 Website System
+*
+* Copyright (C) 2008-2017 Barry Keal G4HDU (http://www.keal.me.uk)
+* Released under the terms and conditions of the
+* GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
+*
+*/
 class addressbookTemplate
 {
     private $roles;
@@ -9,10 +16,10 @@ class addressbookTemplate
     function __construct()
     {
         $sql = e107::getDb();
-        $sql->select('addressbook_roles', 'addressbook_roles_id,addressbook_roles_role',
-            '', 'nowhere');
+        $sql->select('addressbook_roles', 'addressbook_roles_id,addressbook_roles_role', '', 'nowhere');
         $this->roles[0] = 'All Roles';
-        while ($row = $sql->fetch('assoc')) {
+        while ($row = $sql->fetch('assoc'))
+        {
 
             $this->roles[$row['addressbook_roles_id']] = $row['addressbook_roles_role'];
         }
@@ -25,7 +32,7 @@ class addressbookTemplate
         <i class="fa fa-home fa-3" aria-hidden="true"></i>
     </a>
 </div>
-<div id="addressbookNoPermit">'.LAN_PLUGIN_ADDRESSBOOK_FRONT_NOTPERMITTED.'</div>';
+<div id="addressbookNoPermit">' . LAN_PLUGIN_ADDRESSBOOK_FRONT_NOTPERMITTED . '</div>';
         return $retval;
     }
     function noRecords()
@@ -43,8 +50,7 @@ class addressbookTemplate
     {
         $frm = e107::getForm();
 
-        $select = $frm->search('search', $this->search, 'sname', 'roles', $this->roles,
-            $this->rolesValue);
+        $select = $frm->search('search', $this->search, 'sname', 'roles', $this->roles, $this->rolesValue);
         $retval = '
         <div class="addressbookHead">';
         $retval .= $frm->open('addressbookSearch', 'get', e_SELF, null);
@@ -60,19 +66,19 @@ class addressbookTemplate
 	<thead>
 		<tr>
 			<th>
-				'.LAN_PLUGIN_ADDRESSBOOK_FRONT_NAME.'
+				' . LAN_PLUGIN_ADDRESSBOOK_FRONT_NAME . '
 			</th>
 			<th>
-				'.LAN_PLUGIN_ADDRESSBOOK_FRONT_TOWN.'
+				' . LAN_PLUGIN_ADDRESSBOOK_FRONT_TOWN . '
 			</th>
 			<th>
-				'.LAN_PLUGIN_ADDRESSBOOK_FRONT_PHONE.'
+				' . LAN_PLUGIN_ADDRESSBOOK_FRONT_PHONE . '
 			</th>
 			<th>
-				'.LAN_PLUGIN_ADDRESSBOOK_FRONT_MOBILE.'
+				' . LAN_PLUGIN_ADDRESSBOOK_FRONT_MOBILE . '
 			</th>
 			<th>
-				'.LAN_PLUGIN_ADDRESSBOOK_FRONT_EMAIL.'
+				' . LAN_PLUGIN_ADDRESSBOOK_FRONT_EMAIL . '
 			</th>
 		</tr>
 	</thead>
@@ -82,8 +88,7 @@ class addressbookTemplate
     function addressbookListRow($row)
     {
         $retval = '
-		<tr id="listRow-' . $row['addressbook_id'] . '" class="addressBookRow editID' .
-            $row['addressbook_id'] . '" >
+		<tr id="listRow-' . $row['addressbook_id'] . '" class="addressBookRow editID' . $row['addressbook_id'] . '" >
 			<td>
 				' . $row['addressbook_lastname'] . ', ' . $row['addressbook_firstname'] . '
 			</td>
@@ -107,7 +112,7 @@ class addressbookTemplate
         $retval = '
 		<tr>
 			<td colspan="5">
-				<div id="addressbookNone" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_NOMATCH.'</div>
+				<div id="addressbookNone" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_NOMATCH . '</div>
 			</td>
 
 		</tr>';
@@ -122,12 +127,10 @@ class addressbookTemplate
 </div>
 <div style="font-size:32px;float:left;display:inline;">' . $nextPrev . '</div>
 <div style="font-size:32px;float:right;display:inline;">
-    <a href="' . e_PLUGIN_ABS .
-            'addressbook/index.php?action=pdf" id="addressbookpdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-    <a href="' . e_PLUGIN_ABS .
-            'addressbook/index.php?action=csv&search='.$this->search.'&role='.$this->rolesValue.'"><i class="fa fa-download" aria-hidden="true"></i></a>
-    <!--<a href="' . e_PLUGIN_ABS .
-            'addressbook/index.php?action=prn"><i class="fa fa-print" aria-hidden="true"></i></a>-->
+    <a href="' . e_PLUGIN_ABS . 'addressbook/index.php?action=pdf" id="addressbookpdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+    <a href="' . e_PLUGIN_ABS . 'addressbook/index.php?action=csv&search=' . $this->search . '&role=' . $this->rolesValue .
+            '"><i class="fa fa-download" aria-hidden="true"></i></a>
+    <!--<a href="' . e_PLUGIN_ABS . 'addressbook/index.php?action=prn"><i class="fa fa-print" aria-hidden="true"></i></a>-->
 </div>
 <a href="' . e_PLUGIN_ABS .
             'addressbook/index.php?action=ajaxview&id=" id="modallink" data-remote="false" data-toggle="modal" data-target="#myModal" class="btnx btnx-default"></a>
@@ -139,7 +142,7 @@ class addressbookTemplate
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">'.LAN_PLUGIN_ADDRESSBOOK_FRONT_ENTRY.'</h4>
+        <h4 class="modal-title" id="myModalLabel">' . LAN_PLUGIN_ADDRESSBOOK_FRONT_ENTRY . '</h4>
       </div>
       <div id="modal-body" class="modal-body">
             <div id="ajaxSpinner" class="lds-css ng-scope">
@@ -155,7 +158,7 @@ class addressbookTemplate
                             <div></div>
                         </div>
                     </div>
-                    <div id="loadingAB">'.LAN_PLUGIN_ADDRESSBOOK_FRONT_LOADING.'</div>
+                    <div id="loadingAB">' . LAN_PLUGIN_ADDRESSBOOK_FRONT_LOADING . '</div>
                 </div>
                 
             </div> 
@@ -163,7 +166,7 @@ class addressbookTemplate
             <div id="modalContent"></div> 
       </div> <!-- end of modal body -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">'.LAN_PLUGIN_ADDRESSBOOK_FRONT_CLOSE.'</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">' . LAN_PLUGIN_ADDRESSBOOK_FRONT_CLOSE . '</button>
         </div>
     </div>
   </div>
@@ -179,65 +182,50 @@ class addressbookTemplate
         <table  >
             <tbody>
                 <tr  >
-                    <td class="titleCol addressCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_FULLNAME.'</td>
-                    <td class="contentCol addressCell" >' . $row['addressbook_lastname'] .
-            ', ' . $row['addressbook_firstname'] . '</td>
-                    <td class="titleCol commsCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_PHONE.'</td>
-                    <td class="contentCol commsCell" >' . $row['addressbook_phone'] .
-            '</td>
+                    <td class="titleCol addressCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_FULLNAME . '</td>
+                    <td class="contentCol addressCell" >' . $row['addressbook_lastname'] . ', ' . $row['addressbook_firstname'] . '</td>
+                    <td class="titleCol commsCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_PHONE . '</td>
+                    <td class="contentCol commsCell" >' . $row['addressbook_phone'] . '</td>
                 </tr>
                 <tr  >
-                    <td class="titleCol addressCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_ADDRESS.'</td>
-                    <td class="contentCol addressCell" >' . $row['addressbook_addr1'] .
-            '</td>
-                    <td class="titleCol commsCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_MOBILE.'</td>
-                    <td class="contentCol commsCell" >' . $row['addressbook_mobile'] .
-            '</td>
+                    <td class="titleCol addressCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_ADDRESS . '</td>
+                    <td class="contentCol addressCell" >' . $row['addressbook_addr1'] . '</td>
+                    <td class="titleCol commsCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_MOBILE . '</td>
+                    <td class="contentCol commsCell" >' . $row['addressbook_mobile'] . '</td>
                 </tr>
                 <tr  >
-                    <td class="titleCol addressCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_ADDRESS.'</td>
-                    <td class="contentCol addressCell" >' . $row['addressbook_addr2'] .
-            '</td>
-                    <td class="titleCol commsCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_EMAIL.'</td>
-                    <td class="contentCol commsCell" >' . $row['addressbook_email1'] .
-            '</td>
+                    <td class="titleCol addressCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_ADDRESS . '</td>
+                    <td class="contentCol addressCell" >' . $row['addressbook_addr2'] . '</td>
+                    <td class="titleCol commsCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_EMAIL . '</td>
+                    <td class="contentCol commsCell" >' . $row['addressbook_email1'] . '</td>
                 </tr>
                 <tr  >
-                    <td class="titleCol addressCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_TOWN.'</td>
-                    <td class="contentCol addressCell" >' . $row['addressbook_city'] .
-            '</td>
-                    <td class="titleCol commsCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_EMAILALT.'</td>
-                    <td class="contentCol commsCell" >' . $row['addressbook_email2'] .
-            '</td>
+                    <td class="titleCol addressCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_TOWN . '</td>
+                    <td class="contentCol addressCell" >' . $row['addressbook_city'] . '</td>
+                    <td class="titleCol commsCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_EMAILALT . '</td>
+                    <td class="contentCol commsCell" >' . $row['addressbook_email2'] . '</td>
                 </tr>
                 <tr  >
-                    <td class="titleCol addressCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_COUNTY.'</td>
-                    <td class="contentCol addressCell" >' . $row['addressbook_county'] .
-            '</td>
-                    <td class="titleCol commsCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_WEB.'</td>
-                    <td class="contentCol commsCell" >' . $row['addressbook_website'] .
-            '</td>
+                    <td class="titleCol addressCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_COUNTY . '</td>
+                    <td class="contentCol addressCell" >' . $row['addressbook_county'] . '</td>
+                    <td class="titleCol commsCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_WEB . '</td>
+                    <td class="contentCol commsCell" >' . $row['addressbook_website'] . '</td>
                 </tr>
                 <tr style="height: 20px;">
-                    <td class="titleCol addressCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_POST.'</td>
-                    <td class="contentCol addressCell" >' . $row['addressbook_postcode'] .
-            '</td>
-                    <td class="titleCol addressCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_COUNTRY.'</td>
-                    <td class="contentCol addressCell" >' . $row['addressbook_countries_name'] .
-            '</td>
+                    <td class="titleCol addressCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_POST . '</td>
+                    <td class="contentCol addressCell" >' . $row['addressbook_postcode'] . '</td>
+                    <td class="titleCol addressCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_COUNTRY . '</td>
+                    <td class="contentCol addressCell" >' . $row['addressbook_countries_name'] . '</td>
                 </tr>
                 <tr style="height: 20px;">
-                    <td class="titleCol roleCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_ROLE.'</td>
-                    <td class="contentCol roleCell" >' . $row['addressbook_roles_role'] .
-            '</td>
-                    <td class="titleCol roleCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_CATEGORY.'</td>
-                    <td class="contentCol roleCell" >' . $row['addressbook_categories_name'] .
-            '</td>
+                    <td class="titleCol roleCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_ROLE . '</td>
+                    <td class="contentCol roleCell" >' . $row['addressbook_roles_role'] . '</td>
+                    <td class="titleCol roleCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_CATEGORY . '</td>
+                    <td class="contentCol roleCell" >' . $row['addressbook_categories_name'] . '</td>
                 </tr>        
                 <tr style="height: 20px;">
-                    <td class="titleCol notesCell" >'.LAN_PLUGIN_ADDRESSBOOK_FRONT_NOTES.'</td>
-			         <td  class="contentCol notesCell"  colspan="3">' . $row['addressbook_comments'] .
-            '</td>
+                    <td class="titleCol notesCell" >' . LAN_PLUGIN_ADDRESSBOOK_FRONT_NOTES . '</td>
+			         <td  class="contentCol notesCell"  colspan="3">' . $row['addressbook_comments'] . '</td>
                 </tr>
         	</tbody>
         </table>
@@ -250,8 +238,7 @@ class addressbookTemplate
     {
         $retval = '
 <div id="addressbookHeading">
-    <a href="index.php?action=list&from=' . $this->from . '&search=' . $this->
-            search . '&role=' . $this->rolesValue . '">
+    <a href="index.php?action=list&from=' . $this->from . '&search=' . $this->search . '&role=' . $this->rolesValue . '">
         <i class="fa fa-home fa-3" aria-hidden="true"></i>
     </a>
 </div>';

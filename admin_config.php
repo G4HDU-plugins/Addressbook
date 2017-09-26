@@ -1,26 +1,21 @@
 <?php
+
 /*
-* e107 website system
+* Plugin for the e107 Website System
 *
-* Copyright (C) 2017 Barry Keal G4HDU
+* Copyright (C) 2008-2017 Barry Keal G4HDU (http://www.keal.me.uk)
 * Released under the terms and conditions of the
 * GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
-*
-* e107 Address Bbook Plugin
-*
-* $Source: 
-* $Revision$
-* $Date$
-* $Author$ Barry Keal G4HDU
 *
 */
 
 require_once ("../../class2.php");
-if (!getperms("P")) {
+if (!getperms("P"))
+{
     e107::redirect('admin');
     exit;
 }
-e107::lan('addressbook',true,true);
+e107::lan('addressbook', true, true);
 /**
  * plugin_addressbook_admin
  * 
@@ -321,7 +316,7 @@ class plugin_addressbook_admin_ui extends e_admin_ui
             'thclass' => '',
             'filter' => false,
             'forced' => true),
-            
+
         'addressbook_comments' => array(
             'title' => LAN_PLUGIN_ADDRESSBOOK_ADMIN_INFO,
             'type' => 'textarea',
@@ -392,9 +387,9 @@ class plugin_addressbook_admin_form_ui extends e_admin_form_ui
     {
 
         $sql = e107::getDb();
-        $sql->select('addressbook_titles',
-            'addressbook_titles_id,addressbook_titles_title', '', 'nowhere');
-        while ($row = $sql->fetch('assoc')) {
+        $sql->select('addressbook_titles', 'addressbook_titles_id,addressbook_titles_title', '', 'nowhere');
+        while ($row = $sql->fetch('assoc'))
+        {
 
             $this->titles[$row['addressbook_titles_id']] = $row['addressbook_titles_title'];
         }
@@ -403,17 +398,18 @@ class plugin_addressbook_admin_form_ui extends e_admin_form_ui
 
         $types = $this->titles;
 
-        if ($mode == 'read') {
+        if ($mode == 'read')
+        {
             return vartrue($types[$curVal]) . '';
         }
 
         if ($mode == 'batch') // Custom Batch List for blank_type
-            {
+        {
             return $types;
         }
 
         if ($mode == 'filter') // Custom Filter List for blank_type
-            {
+        {
             return $types;
         }
         $frm = e107::getForm();
@@ -429,10 +425,10 @@ class plugin_addressbook_admin_form_ui extends e_admin_form_ui
      */
     function addressbook_category($curVal, $mode)
     {
-         $sql = e107::getDb();
-        $sql->select('addressbook_categories', 'addressbook_categories_id,addressbook_categories_name',
-            '', 'nowhere');
-        while ($row = $sql->fetch('assoc')) {
+        $sql = e107::getDb();
+        $sql->select('addressbook_categories', 'addressbook_categories_id,addressbook_categories_name', '', 'nowhere');
+        while ($row = $sql->fetch('assoc'))
+        {
 
             $this->roles[$row['addressbook_categories_id']] = $row['addressbook_categories_name'];
         }
@@ -440,17 +436,18 @@ class plugin_addressbook_admin_form_ui extends e_admin_form_ui
 
         $types = $this->roles;
 
-        if ($mode == 'read') {
+        if ($mode == 'read')
+        {
             return vartrue($types[$curVal]) . '';
         }
 
         if ($mode == 'batch') // Custom Batch List for blank_type
-            {
+        {
             return $types;
         }
 
         if ($mode == 'filter') // Custom Filter List for blank_type
-            {
+        {
             return $types;
         }
         //     print_a($this->titles);
@@ -467,9 +464,9 @@ class plugin_addressbook_admin_form_ui extends e_admin_form_ui
     function addressbook_role($curVal, $mode)
     {
         $sql = e107::getDb();
-        $sql->select('addressbook_roles', 'addressbook_roles_id,addressbook_roles_role',
-            '', 'nowhere');
-        while ($row = $sql->fetch('assoc')) {
+        $sql->select('addressbook_roles', 'addressbook_roles_id,addressbook_roles_role', '', 'nowhere');
+        while ($row = $sql->fetch('assoc'))
+        {
 
             $this->roles[$row['addressbook_roles_id']] = $row['addressbook_roles_role'];
         }
@@ -477,17 +474,18 @@ class plugin_addressbook_admin_form_ui extends e_admin_form_ui
 
         $types = $this->roles;
 
-        if ($mode == 'read') {
+        if ($mode == 'read')
+        {
             return vartrue($types[$curVal]) . '';
         }
 
         if ($mode == 'batch') // Custom Batch List for blank_type
-            {
+        {
             return $types;
         }
 
         if ($mode == 'filter') // Custom Filter List for blank_type
-            {
+        {
             return $types;
         }
         //     print_a($this->titles);
@@ -502,34 +500,35 @@ class plugin_addressbook_admin_form_ui extends e_admin_form_ui
      * @param mixed $mode
      * @return
      */
-    function addressbook_country($curVal='', $mode)
+    function addressbook_country($curVal = '', $mode)
     {
-        if(empty($curVal)){
-        $curVal = e107::pref('addressbook', 'defaultcountry');
-        
+        if (empty($curVal))
+        {
+            $curVal = e107::pref('addressbook', 'defaultcountry');
+
         }
         $sql = e107::getDb();
-        $sql->select('addressbook_countries',
-            'addressbook_countries_id,addressbook_countries_name',
-            'ORDER BY addressbook_countries_name', 'nowhere');
-        while ($row = $sql->fetch('assoc')) {
+        $sql->select('addressbook_countries', 'addressbook_countries_id,addressbook_countries_name', 'ORDER BY addressbook_countries_name', 'nowhere');
+        while ($row = $sql->fetch('assoc'))
+        {
 
             $this->countries[$row['addressbook_countries_id']] = $row['addressbook_countries_name'];
         }
 
         $types = $this->countries;
 
-        if ($mode == 'read') {
+        if ($mode == 'read')
+        {
             return vartrue($types[$curVal]) . '';
         }
 
         if ($mode == 'batch') // Custom Batch List for blank_type
-            {
+        {
             return $types;
         }
 
         if ($mode == 'filter') // Custom Filter List for blank_type
-            {
+        {
             return $types;
         }
         //     print_a($this->titles);
@@ -547,27 +546,27 @@ class plugin_addressbook_admin_form_ui extends e_admin_form_ui
     function defaultcountry($curVal, $mode)
     {
         $sql = e107::getDb();
-        $sql->select('addressbook_countries',
-            'addressbook_countries_id,addressbook_countries_name',
-            'ORDER BY addressbook_countries_name', 'nowhere');
-        while ($row = $sql->fetch('assoc')) {
+        $sql->select('addressbook_countries', 'addressbook_countries_id,addressbook_countries_name', 'ORDER BY addressbook_countries_name', 'nowhere');
+        while ($row = $sql->fetch('assoc'))
+        {
 
             $this->countries[$row['addressbook_countries_id']] = $row['addressbook_countries_name'];
         }
 
         $types = $this->countries;
 
-        if ($mode == 'read') {
+        if ($mode == 'read')
+        {
             return vartrue($types[$curVal]) . '';
         }
 
         if ($mode == 'batch') // Custom Batch List for blank_type
-            {
+        {
             return $types;
         }
 
         if ($mode == 'filter') // Custom Filter List for blank_type
-            {
+        {
             return $types;
         }
         //     print_a($this->titles);

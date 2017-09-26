@@ -1,17 +1,17 @@
 <?php
+
 /*
-* e107 website system
+* Plugin for the e107 Website System
 *
-* Copyright (C) 2008-2014 e107 Inc (e107.org)
+* Copyright (C) 2008-2017 Barry Keal G4HDU (http://www.keal.me.uk)
 * Released under the terms and conditions of the
 * GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
-* 
-* blank e_search addon 
+*
 */
 
 
-
-if (!defined('e107_INIT')) {
+if (!defined('e107_INIT'))
+{
     exit;
 }
 
@@ -31,8 +31,7 @@ class addressbook_search extends e_search // include plugin-folder in the name.
                 left join #addressbook_categories ON addressbook_category = addressbook_categories_id
                 left join #addressbook_countries ON addressbook_country = addressbook_countries_id',
 
-            'advanced' => array('date' => array('type' => 'date', 'text' => LAN_DATE_POSTED),
-            'author' => array('type' => 'author', 'text' => LAN_SEARCH_61)),
+            'advanced' => array('date' => array('type' => 'date', 'text' => LAN_DATE_POSTED), 'author' => array('type' => 'author', 'text' => LAN_SEARCH_61)),
 
             'return_fields' => array(
                 'addressbook_id',
@@ -57,13 +56,12 @@ class addressbook_search extends e_search // include plugin-folder in the name.
                 'addressbook_roles_role' => '1.2',
                 'addressbook_countries_name' => '1.0'), // fields and weights.
 
-            'order' => array('addressbook_lastname' => 'DESC', 'addressbook_firstname' =>
-                    'ASC'),
+            'order' => array('addressbook_lastname' => 'DESC', 'addressbook_firstname' => 'ASC'),
             'refpage' => 'index.php');
         $class = e107::pref('addressbook', 'viewClass');
-      //  if (e107::getUser()->checkClass($class, true)) {
-            return $search;
-       // }
+        //  if (e107::getUser()->checkClass($class, true)) {
+        return $search;
+        // }
     }
 
 
@@ -74,22 +72,20 @@ class addressbook_search extends e_search // include plugin-folder in the name.
         $class = e107::pref('addressbook', 'viewClass');
 
         // preg_match("/([0-9]+)\.(.*)/", $row['blank_nick'], $user);
-       // if (e107::getUser()->checkClass($class, false)) {
-            $res = array();
+        // if (e107::getUser()->checkClass($class, false)) {
+        $res = array();
 
-            $res['link'] = e_PLUGIN . "addressbook/index.php?action=view&id=" . $row['addressbook_id'];
-            $res['pre_title'] = 'Entry : ';
-            $res['title'] = $row['addressbook_titles_title'] . ' ' . $row['addressbook_lastname'] .
-                ', ' . $row['addressbook_firstname'];
+        $res['link'] = e_PLUGIN . "addressbook/index.php?action=view&id=" . $row['addressbook_id'];
+        $res['pre_title'] = 'Entry : ';
+        $res['title'] = $row['addressbook_titles_title'] . ' ' . $row['addressbook_lastname'] . ', ' . $row['addressbook_firstname'];
 
-            $res['summary'] = $row['addressbook_roles_role'] . ' ' . $row['addressbook_city'] .
-                ' ' . $row['addressbook_phone'] . ' ' . $row['addressbook_mobile'] . ' ' . $row['addressbook_email1'] .
-                ' ' . $row['addressbook_categories_name'] . ' ';
-            $res['detail'] = $tp->toDate($row['addressbook_lastupdate'], "long");
-       // } else {
+        $res['summary'] = $row['addressbook_roles_role'] . ' ' . $row['addressbook_city'] . ' ' . $row['addressbook_phone'] . ' ' . $row['addressbook_mobile'] .
+            ' ' . $row['addressbook_email1'] . ' ' . $row['addressbook_categories_name'] . ' ';
+        $res['detail'] = $tp->toDate($row['addressbook_lastupdate'], "long");
+        // } else {
         //    $res = array();
 
-       // }
+        // }
         return $res;
 
     }
@@ -105,12 +101,13 @@ class addressbook_search extends e_search // include plugin-folder in the name.
 
         $qry = "";
 
-        if (vartrue($parm['time']) && is_numeric($parm['time'])) {
-            $qry .= " blank_datestamp " . ($parm['on'] == 'new' ? '>=' : '<=') . " '" . (time
-                () - $parm['time']) . "' AND";
+        if (vartrue($parm['time']) && is_numeric($parm['time']))
+        {
+            $qry .= " blank_datestamp " . ($parm['on'] == 'new' ? '>=' : '<=') . " '" . (time() - $parm['time']) . "' AND";
         }
 
-        if (vartrue($parm['author'])) {
+        if (vartrue($parm['author']))
+        {
             $qry .= " blank_nick LIKE '%" . $tp->toDB($parm['author']) . "%' AND";
         }
 

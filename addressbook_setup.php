@@ -1,17 +1,7 @@
 <?php
-/*
-* e107 website system
-*
-* Copyright (C) 2008-2013 e107 Inc (e107.org)
-* Released under the terms and conditions of the
-* GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
-*
-* Custom install/uninstall/update routines for blank plugin
-**
-*/
 
-
-if (!class_exists("addressbook_setup")) {
+if (!class_exists("addressbook_setup"))
+{
     class addressbook_setup
     {
 
@@ -284,9 +274,11 @@ if (!class_exists("addressbook_setup")) {
 	('ZA', 'South Africa'),
 	('ZM', 'Zambia'),
 	('ZW', 'Zimbabwe');";
-            if ($sql->gen($countries)) {
+            if ($sql->gen($countries))
+            {
                 $mes->add("Countries added", E_MESSAGE_SUCCESS);
-            } else {
+            } else
+            {
                 $mes->add("Failed to add contries list", E_MESSAGE_ERROR);
             }
 
@@ -310,9 +302,11 @@ INSERT INTO `#addressbook_titles` (`addressbook_titles_id`, `addressbook_titles_
 	(11, 'Sr'),
 	(12, 'Lord'),
 	(13, 'Prof');";
-            if ($sql->gen($titles)) {
+            if ($sql->gen($titles))
+            {
                 $mes->add("Titles added", E_MESSAGE_SUCCESS);
-            } else {
+            } else
+            {
                 $mes->add("Failed to add titles list", E_MESSAGE_ERROR);
             }
 
@@ -333,13 +327,15 @@ INSERT INTO `#addressbook_titles` (`addressbook_titles_id`, `addressbook_titles_
     (7, 'Social Sec'),
     (8, 'Almoner')
     ;";
-            if ($sql->gen($roles,true)) {
+            if ($sql->gen($roles, true))
+            {
                 $mes->add("Roles added", E_MESSAGE_SUCCESS);
-            } else {
+            } else
+            {
                 $mes->add("Failed to add roles", E_MESSAGE_ERROR);
             }
-        //die("ww2");
-           /**
+            //die("ww2");
+            /**
              * 
              * Insert cats into table
              * 
@@ -352,9 +348,11 @@ INSERT INTO `#addressbook_titles` (`addressbook_titles_id`, `addressbook_titles_
 	(3, 'Other Club Member'),
     (4, 'Zone Officer'),
     (5, 'Division Officer');";
-            if ($sql->gen($cats)) {
+            if ($sql->gen($cats))
+            {
                 $mes->add("Categories added", E_MESSAGE_SUCCESS);
-            } else {
+            } else
+            {
                 $mes->add("Failed to add category", E_MESSAGE_ERROR);
             }
         }

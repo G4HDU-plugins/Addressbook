@@ -1,4 +1,5 @@
 <?php
+
 /*
 * e107 website system
 *
@@ -9,7 +10,8 @@
 * addressbook
 *
 */
-if (!defined('e107_INIT')) {
+if (!defined('e107_INIT'))
+{
     exit;
 }
 
@@ -27,7 +29,8 @@ class plugin_addressbook_gold_class extends gold_class
     {
         $this->parent = $parent;
     }
-    static public function getInfo() {
+    static public function getInfo()
+    {
         return self::$goldInfo;
     }
     function getListData()
@@ -37,25 +40,28 @@ class plugin_addressbook_gold_class extends gold_class
         $list_caption = $this->parent->settings['caption'];
         $list_display = ($this->parent->settings['open'] ? "" : "none");
 
-        if ($this->parent->mode == "new_page" || $this->parent->mode == "new_menu") {
+        if ($this->parent->mode == "new_page" || $this->parent->mode == "new_menu")
+        {
             $lvisit = $this->parent->getlvisit();
             $qry = "cb_datestamp>" . $lvisit;
-        } else {
+        } else
+        {
             $qry = "cb_id != '0' ";
         }
         $qry .= " ORDER BY cb_datestamp DESC LIMIT 0," . intval($this->parent->settings['amount']);
 
         $bullet = $this->parent->getBullet($this->parent->settings['icon']);
 
-        if (!$chatbox_posts = $this->parent->e107->sql->gen("SELECT * FROM #chatbox WHERE " .
-            $qry)) {
+        if (!$chatbox_posts = $this->parent->e107->sql->gen("SELECT * FROM #chatbox WHERE " . $qry))
+        {
             $list_data = LIST_CHATBOX_2;
-        } else {
-            while ($row = $this->parent->e107->sql->fetch()) {
+        } else
+        {
+            while ($row = $this->parent->e107->sql->fetch())
+            {
                 $cb_id = substr($row['cb_nick'], 0, strpos($row['cb_nick'], "."));
                 $cb_nick = substr($row['cb_nick'], (strpos($row['cb_nick'], ".") + 1));
-                $cb_message = ($row['cb_blocked'] ? CHATBOX_L6 : str_replace("<br />", " ", $tp->
-                    toHTML($row['cb_message'])));
+                $cb_message = ($row['cb_blocked'] ? CHATBOX_L6 : str_replace("<br />", " ", $tp->toHTML($row['cb_message'])));
                 //	$rowheading = $this->parent->parse_heading($cb_message);
 
                 //<a href='".e_BASE."user.php?id.$cb_id'>".$cb_nick."</a>
@@ -64,11 +70,9 @@ class plugin_addressbook_gold_class extends gold_class
                 $userlink = "<a href='" . $link . "'>" . $cb_nick . "</a>";
                 $record['icon'] = $bullet;
                 //	$record['heading'] = $rowheading;
-                $record['author'] = ($this->parent->settings['author'] ? ($cb_id != 0 ? $userlink :
-                    $cb_nick) : "");
+                $record['author'] = ($this->parent->settings['author'] ? ($cb_id != 0 ? $userlink : $cb_nick) : "");
                 $record['category'] = "";
-                $record['date'] = ($this->parent->settings['date'] ? ($row['cb_datestamp'] ? $this->
-                    parent->getListDate($row['cb_datestamp']) : "") : "");
+                $record['date'] = ($this->parent->settings['date'] ? ($row['cb_datestamp'] ? $this->parent->getListDate($row['cb_datestamp']) : "") : "");
                 $record['info'] = $cb_message;
 
                 $list_data[] = $record;
