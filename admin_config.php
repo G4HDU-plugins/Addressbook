@@ -16,6 +16,8 @@ if (!getperms("P"))
     exit;
 }
 e107::lan('addressbook', true, true);
+e107::lan('addressbook', 'help', true); // e_PLUGIN.'guestbook/languages/'.e_LANGUAGE.'/guestbook.php'
+
 /**
  * plugin_addressbook_admin
  * 
