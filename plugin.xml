@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e107Plugin name="Address Book Plugin" lan="LAN_PLUGIN_addressbook_NAME" version="2.0" date="2017-06-30" compatibility="2.0" installRequired="true" >
+<e107Plugin name="Address Book Plugin" lan="LAN_PLUGIN_ADDRESSBOOK_NAME" version="2.0.2" date="2017-06-30" compatibility="2.0" installRequired="true" >
 	<author name="Barry Keal G4HDU" url="http://www.keal.me.uk" />
 	
-	<description lan="LAN_PLUGIN_addressbook_DIZ">An address book for listing names, addresses etc.</description>
+	<description lan="LAN_PLUGIN_ADDRESSBOOK_DIZ">An address book for listing names, addresses etc.</description>
 	<category>content</category>
 	<keywords>
 		<word>blank</word>
@@ -13,11 +13,11 @@
 		<image></image>
 	</screenshots>
 	<adminLinks>
-		<link url='admin_config.php' description='Configure Blank Plugin' icon='images/addressbook_32.png' iconSmall='images/addressbook.png' icon128="" primary='true' >LAN_CONGIGURE</link>
-		<link url="admin_config.php?mode=options" description="Configure Blank Prefs" icon="manage" >Blank Prefs</link>
+		<link url='admin_config.php' description='Configure Addressbook Plugin' icon='images/addressbook_32.png' iconSmall='images/addressbook_16.png' icon128="" primary='true' >LAN_CONGIGURE</link>
+		<link url="admin_config.php?mode=options" description="Configure Addressbook Prefs" icon="manage" >Blank Prefs</link>
 	</adminLinks>
 	<siteLinks>
-		<link url="{e_PLUGIN}addressbook/index.php" perm='members' sef='index'>LAN_PLUGIN_addressbook_LINK</link>
+		<link url="{e_PLUGIN}addressbook/index.php" perm='members' sef='index'>LAN_PLUGIN_ADDRESSBOOK_LINK</link>
 	</siteLinks>
 	<pluginPrefs>
 		<pref name="viewClass">253</pref>
