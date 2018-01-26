@@ -77,24 +77,5 @@
     background-color:#f6ffec;
     }
 .notesCell{
- background-color:#fdf6ec;       
-}
-
-
-
-#ajaxSpinner{
-   text-align:center; 
-    }
-#zzajaxSpinnerSpin{
- 
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-    }
-#zzloadingAB{
-    display: inline-block;
-  margin-left: auto;
-  margin-right: auto;  
-    text-align:center;
-    padding-left: 5px;
+    background-color:#fdf6ec;       
 }

@@ -26,7 +26,6 @@ class addressbook_class
 
     function __construct()
     {
-       // error_reporting(E_ALL);
         $this->pdfInstalled = e107::isInstalled('e107pdf');
         //  var_dump($this->pdfInstalled);
         if ($this->pdfInstalled)
@@ -57,11 +56,9 @@ class addressbook_class
             'pdf',
             'list',
             '');
-        //print_a($pref);
+
         $this->session = new e_session();
         $this->session->init('addressbook');
-        //var_dump( $this->session->getNamespaceKey());
-        //var_dump( $this->session->getData('addbook'));
 
         $this->session->setData('addbook', 'fred');
 
