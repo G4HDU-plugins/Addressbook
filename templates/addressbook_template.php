@@ -127,7 +127,7 @@ class addressbookTemplate
 </div>
 <div style="font-size:32px;float:left;display:inline;">' . $nextPrev . '</div>
 <div style="font-size:32px;float:right;display:inline;">
-    <a href="' . e_PLUGIN_ABS . 'addressbook/index.php?action=pdf" id="addressbookpdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+    <!--<a href="' . e_PLUGIN_ABS . 'addressbook/index.php?action=pdf" id="addressbookpdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>-->
     <a href="' . e_PLUGIN_ABS . 'addressbook/index.php?action=csv&search=' . $this->search . '&role=' . $this->rolesValue .
             '"><i class="fa fa-download" aria-hidden="true"></i></a>
     <!--<a href="' . e_PLUGIN_ABS . 'addressbook/index.php?action=prn"><i class="fa fa-print" aria-hidden="true"></i></a>-->
@@ -146,23 +146,10 @@ class addressbookTemplate
       </div>
       <div id="modal-body" class="modal-body">
             <div id="ajaxSpinner" class="lds-css ng-scope">
-                <div id="ajaxSpinnerSpin">
-                    <div  class="lds-pacman">
-                        <div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                    </div>
+                <img src="'.e_PLUGIN.'addressbook/images/loader.gif" /><div id="ajaxSpinnerSpin">
                     <div id="loadingAB">' . LAN_PLUGIN_ADDRESSBOOK_FRONT_LOADING . '</div>
                 </div>
-                
             </div> 
-            
             <div id="modalContent"></div> 
       </div> <!-- end of modal body -->
         <div class="modal-footer">

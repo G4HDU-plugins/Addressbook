@@ -26,17 +26,17 @@ class addressbook_class
 
     function __construct()
     {
-        error_reporting(E_ALL);
+       // error_reporting(E_ALL);
         $this->pdfInstalled = e107::isInstalled('e107pdf');
         //  var_dump($this->pdfInstalled);
         if ($this->pdfInstalled)
         {
-            require_once (e_PLUGIN . 'pdf/e107pdf.php'); //require the e107pdf class
+         //   require_once (e_PLUGIN . 'pdf/e107pdf.php'); //require the e107pdf class
         }
         $this->message = e107::getMessage();
 
         e107::js('footer', e_PLUGIN . 'addressbook/js/addressbook.js', 'jquery'); // Load Plugin javascript and include jQuery framework
-        e107::css('addressbook', e_PLUGIN . 'addressbook/css/addressbook.css'); // load css file
+        e107::css('addressbook', 'css/addressbook.css'); // load css file
         //  e107::lan('addressbook'); // load language file ie. e107_plugins/addressbook/languages/English.php
 
         require_once (e_PLUGIN . 'addressbook/templates/addressbook_template.php');
